@@ -1,0 +1,58 @@
+Problem D. Albocede DNA
+Confused? Read the quick-start guide.
+Small input
+16 points	
+Solve D-small
+You may try multiple times, with penalties for wrong submissions.
+Large input
+23 points	
+You must solve the small input first.
+You have 8 minutes to solve 1 input file. (Judged after contest.)
+
+
+The DNA of the Albocede alien species is made up of 4 types of nucleotides: a, b, c, and d. Different Albocedes may have different sequences of these nucleotides, but any Albocede's DNA sequence obeys all of the following rules:
+It contains at least one copy of each of a, b, c, and d.
+All as come before all bs, which come before all cs, which come before all ds.
+There are exactly as many 'a's as 'c's.
+There are exactly as many 'b's as 'd's.
+For example, abcd and aabbbccddd are valid Albocede DNA sequences. acbd, abc, and abbccd are not.
+
+The Albocede-n is an evolved species of Albocede. The DNA sequence of an Albocede-n consists of one or more valid Albocede DNA sequences, concatenated together end-to-end. For example, abcd and aaabcccdaabbbccdddabcd are valid Albocede-n DNA sequences. (Observe that a valid Albocede-n DNA sequence is not necessarily also a valid Albocede DNA sequence.)
+
+From one of your alien expeditions, you retrieved an interesting sequence of DNA made up of only as, bs, cs, and ds. You are interested in how many of the different subsequences of that sequence would be valid Albocede-n DNA sequences. (Even if multiple different selections of nucleotides from the sequence produce the same valid subsequence, they still all count as distinct subsequences.) Since the result may be very large, please find it modulo 1000000007 (109 + 7).
+
+Input
+
+The first line of the input gives the number of test cases, T. Each of the next T lines contains a string S that consists only of the characters a, b, c, and d.
+
+Output
+
+For each test case, output one line containing "Case #x: y", where x is the test case number (starting from 1) and y is the output of the xth test case.
+
+Limits
+
+1 ≤ T ≤ 20.
+Small dataset
+
+1 ≤ length of S ≤ 50.
+Large dataset
+
+1 ≤ length of S ≤ 500.
+Sample
+
+
+Input 
+ 	
+Output 
+ 
+5
+abcd
+aaaabcd
+aaaabbccd
+abcdabcdaabccd
+b
+Case #1: 1
+Case #2: 4
+Case #3: 28
+Case #4: 71
+Case #5: 0

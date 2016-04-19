@@ -1,0 +1,66 @@
+Problem C. gNumbers
+Confused? Read the quick-start guide.
+Small input
+8 points	
+Solve C-small
+You may try multiple times, with penalties for wrong submissions.
+Large input
+16 points	
+You must solve the small input first.
+You have 8 minutes to solve 1 input file. (Judged after contest.)
+gNumbers
+
+Googlers are crazy about numbers and games, especially number games! Two Googlers, Laurence and Seymour, have invented a new two-player game based on "gNumbers". A number is a gNumber if and only if the sum of the number's digits has no positive divisors other than 1 and itself. (In particular, note that 1 is a gNumber.)
+
+The game works as follows: First, someone who is not playing the game chooses a starting number N. Then, the two players take turns. On a player's turn, the player checks whether the current number C is a gNumber. If it is, the player loses the game immediately. Otherwise, the player chooses a prime factor P of C, and keeps dividing C by P until P is no longer a factor of C. (For example, if the current number were 72, the player could either choose 2 and repeatedly divide by 2 until reaching 9, or choose 3 and repeatedly divide by 3 until reaching 8.) Then the result of the division becomes the new current number, and the other player's turn begins.
+
+Laurence always gets to go first, and he hates to lose. Given a number N, he wants you to tell him which player is certain to win, assuming that both players play optimally.
+
+Input
+
+The first line of the input gives the number of test cases, T. T test cases follow; each consists of a starting number N.
+
+Output
+
+For each test case, output one line containing "Case #x: y", where x is the test case number (starting from 1) and y is the winner's name: either Laurence or Seymour.
+
+Limits
+
+1 ≤ T ≤ 100.
+Small dataset
+
+1 < N ≤ 1000.
+Large dataset
+
+1 < N ≤ 1015.
+Sample
+
+
+Input 
+ 	
+Output 
+ 
+9
+2
+3
+4
+6
+8
+9
+30
+36300
+1000000000000000
+
+Case #1: Seymour
+Case #2: Seymour
+Case #3: Laurence
+Case #4: Laurence
+Case #5: Laurence
+Case #6: Laurence
+Case #7: Seymour
+Case #8: Laurence
+Case #9: Seymour
+
+In Case #1, 2 is already a gNumber, since the sum of its digits is 2, which has no positive divisors other than 1 and itself. So Laurence immediately loses, which means Seymour wins. The same is true for Case #2.
+
+In Case #3, 4 is not a gNumber, since the sum of its digits is 4, which has a positive divisor other than 1 and itself (namely, 2). 4 has one prime factor (2), so Laurence must choose this factor and repeatedly divide 4 by it, which leaves him with 1. Then, Seymour begins his turn with 1, which is a gNumber. So he loses and Laurence wins.
