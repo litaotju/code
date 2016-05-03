@@ -5,32 +5,16 @@ using namespace std;
 
 typedef int NodeData_t;
 
-struct BiNode{
-	NodeData_t data;
-	BiNode * left;
-	BiNode * right;
-	BiNode * parent;
-	BiNode(NodeData_t data){
-		this->data = data;
-		left = NULL;
-		right = NULL;
-		parent = NULL;
-	}
-	friend ostream & operator << (ostream &out, BiNode & node){
-		out<< node.data;
-		return out;
-	}
-};
-
 
 template<class Node> 
 class BiSearchTree {
 public:
 	Node * root;
-	BiSearchTree(Node * root){
-		assert(root!= NULL);
-		this->root = root;
+	
+	BiSearchTree(Node * ro = NULL): root(ro){ 
+		cout<<"Cunstruction"<<endl;
 	}
+	
 	//中序遍历
 	void inorderTreeWalk(){
 		_inorderTreeWalk(root);
@@ -89,6 +73,7 @@ public:
 	Node & maximum_r(){
 		return maximum_r(root);
 	}
+	
 	Node & maximum_r(Node * start){
 		if( start ->right == NULL){
 			return *start;
@@ -111,6 +96,33 @@ public:
 		return *parent;
 	}
 	
+	BiSearchTree & insert(Node * node){
+		Node *y = NULL; //y是待插入节点的父节点
+		Node *x = root;
+		while( x != NULL){
+			y = x;
+			if( node->data < x->data){
+				x = x->left;
+			}else{
+				x = x->right;
+			}
+		}
+		node->parent = y;
+		if( y == NULL){ //树为空
+			root = node;
+			return *this;
+		}
+		if( node->data > y->data){
+			y->right = node;
+		}else{
+			y->left = node;
+		}
+		return *this;
+	}
+	
+	//TODO:节点的删除
+	
+	
 private:
 	//中序遍历，复杂度为O(n)
 	void _inorderTreeWalk(Node * x){
@@ -119,7 +131,6 @@ private:
 		cout<< *x <<", ";
 		_inorderTreeWalk(x->right);
 	}
-	
 	//查找关键字，复杂度为O(h)
 	Node & _search(Node * node, NodeData_t keyword) const{
 		if(node == NULL || keyword == node->data){
@@ -131,37 +142,59 @@ private:
 			return _search(node->right, keyword);
 		}
 	}
-
 };
 
+
+class BiNode{
+private:
+	NodeData_t data;
+	BiNode * left;
+	BiNode * right;
+	BiNode * parent;
+	friend BiSearchTree<BiNode>;
+public:
+	BiNode(NodeData_t data){
+		this->data = data;
+		left = NULL;
+		right = NULL;
+		parent = NULL;
+	}
+	friend ostream & operator << (ostream &out, BiNode & node){
+		out<< node.data;
+		return out;
+	}
+	
+};
+
+
 int main(){
-	BiNode a(10), b(9), c(6), d(13);
+	////Handly insert all the nodes
+	// BiNode a(10), b(9), c(6), d(13);
+	// a.left = &b;
+	// b.parent = &a;
+	// a.right = &d;
+	// d.parent = &a;
+	// b.left = &c;
+	// c.parent = &b;
+	// BiSearchTree<BiNode> tree0(&a);
+	// BiNode *f =  new BiNode(18);
+	// tree0.search(13).right = f;
+	// f->parent = &tree0.search(13);
+	// tree0.inorderTreeWalk();
+	// cout<<endl;
 	
-	a.left = &b;
-	b.parent = &a;
-	
-	a.right = &d;
-	d.parent = &a;
-	
-	b.left = &c;
-	c.parent = &b;
-	
-	BiSearchTree<BiNode> tree(&a);
+	//自动维护二叉查找树
+	BiSearchTree<BiNode> tree;
+	tree.insert(new BiNode(10)).insert(new BiNode(9)).insert(new BiNode(6)).insert(new BiNode(13));
+	tree.insert(new BiNode(18));
 	tree.inorderTreeWalk();
 	cout<<endl;
-
-	BiNode *f =  new BiNode(18);
-	tree.search(13).right = f;
-	f->parent = &tree.search(13);
 	cout<<tree.search(18)<<endl;
 	cout<<tree.search_i(18)<<endl;
-	
 	cout<<"minimum "<< tree.minimum()<<endl;
 	cout<<"minimum "<< tree.minimum_r()<<endl;
 	cout<<"maximum "<< tree.maximum()<<endl;
 	cout<<"maximum "<< tree.maximum_r()<<endl;
-	
-	cout<< tree.search(10) << tree.search(6)<<endl;
 	cout<<"successor of 10 " << tree.successor( &tree.search(10)) <<endl;
 	cout<<"successor of 6 " << tree.successor( &tree.search(6)) <<endl;
 }
