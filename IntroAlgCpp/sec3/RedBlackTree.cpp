@@ -47,9 +47,32 @@ public:
         delete nil;
     }
     
-    RedBlackTree & insert(Node *){
+    RedBlackTree & insert(Node *node){
+        Node * y = this->nil;
+        Node * x = root;
+         while( x != nil){
+             y = x;
+             if( node->key < x->key){
+                 x = x->left;
+             }else{
+                 x = x->right;
+             }
+         }
+         node-> parent = y;
+         if( y = nil){
+             root = node;
+         }else if( node->key > y->key){
+             y->right = node;
+         }else{
+             y->left = node;
+         }
+         node ->left = nil;
+         node ->right = nil;
+         node ->color = red;
+         insertFixUp(node);
+         return *this;
     }
-        
+    
     RedBlackTree & leftRotate(Node *x){
         Node * y = x->right;
         //把 Y的左边 挂到x上面
@@ -93,6 +116,11 @@ public:
         x->right = y;
         y->parent = x;
         return *this;
+    }
+    
+private:
+    void insertFixUp(Node * node){
+        //TODO: 保持红黑树的性质
     }
 };
 
