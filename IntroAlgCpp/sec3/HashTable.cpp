@@ -5,7 +5,7 @@ using namespace std;
 int M =100;
 double A = 0.618;
 /*
-本源代码主要实验了两种哈希函数的hash过程
+锟斤拷源锟斤拷锟斤拷锟斤拷要实锟斤拷锟斤拷锟斤拷锟街癸拷希锟斤拷锟斤拷锟斤拷hash锟斤拷锟斤拷
 */
 
 typedef int Data;
@@ -17,13 +17,13 @@ private:
     int (* hashFunc)(int);
     Data ** table;
     
-    //禁止调用拷贝构造函数
-    //因为含有 Data**指针，所以如果使用编译器默认的拷贝构造函数，会出现问题
+    //锟斤拷止锟斤拷锟矫匡拷锟斤拷锟斤拷锟届函锟斤拷
+    //锟斤拷为锟斤拷锟斤拷 Data**指锟诫，锟斤拷锟斤拷锟斤拷锟斤拷使锟矫憋拷锟斤拷锟斤拷默锟较的匡拷锟斤拷锟斤拷锟届函锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷
     //Effective C++
     HashTable(const HashTable & right){
     }
-    //同理，使得编译器不自动生成赋值操作符
-    //禁止调用=赋值
+    //同锟斤拷锟斤拷使锟矫憋拷锟斤拷锟斤拷锟斤拷锟皆讹拷锟斤拷锟缴革拷值锟斤拷锟斤拷锟斤拷
+    //锟斤拷止锟斤拷锟斤拷=锟斤拷值
     HashTable operator = (const HashTable & right){
     }
     
@@ -48,12 +48,12 @@ public:
     }
     
 };
-//直接取余数函数
+//直锟斤拷取锟斤拷锟斤拷锟斤拷锟斤拷
 int modHash(int key){
     return key % M;
 }
 
-//乘法哈希函数
+//锟剿凤拷锟斤拷希锟斤拷锟斤拷
 int multiplicationHash(int key){
     double multi = A*key;
     return static_cast<int>(floor(M*(multi-floor(multi))));
@@ -69,13 +69,12 @@ int main(){
         p = modHash;
         HashTable<Data> table(M, p);
         cout<<table.getTableEntry(100) << table.getTableEntry(89)<<endl;        
-        // // 会调用复制构造函数
+        // // 锟斤拷锟斤拷锟矫革拷锟狡癸拷锟届函锟斤拷
          // HashTable<Data> table2 = table;
          // HashTable<Data> table3(M,p);
-        // //会调用赋值操作符
+        // //锟斤拷锟斤拷锟矫革拷值锟斤拷锟斤拷锟斤拷
          // table3 = table;
          p = multiplicationHash;
          HashTable<Data>table2(M,p);
          cout<< table2.getTableEntry(100) << table2.getTableEntry(89)<<endl;
     }
-}
